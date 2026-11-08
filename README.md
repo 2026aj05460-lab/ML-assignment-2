@@ -24,11 +24,12 @@ The goal is to implement and evaluate five supervised machine learning classific
 | Decision Tree | 0.9211 | 0.9163 | 0.9565 | 0.9167 | 0.9362 | 0.8341 |
 
 ## e. Observations on Model Performance
-* **Logistic Regression:** Top performer across all key metrics (Accuracy: 0.9825, AUC: 0.9954, MCC: 0.9623). FNA cell morphological measurements show strong linear separability with malignancy, allowing $L_2$-regularized logistic loss to converge to an optimal decision boundary.
-* **Support Vector Machine (RBF):** Closely matches Logistic Regression with an Accuracy of 0.9825, MCC of 0.9623, and AUC of 0.9950. The radial basis function separates subtle non-linear margin variations effectively.
-* **K-Nearest Neighbors (KNN, k=5):** Strong local clustering performance (Accuracy: 0.9561, MCC: 0.9054), benefiting from standard scaling across the 30 continuous features.
-* **Naive Bayes (GaussianNB):** Good discriminative ranking (AUC: 0.9878, Accuracy: 0.9386), although class-conditional feature independence is partially violated by correlated cell dimension features.
-* **Decision Tree (CART):** Lowest scoring model (Accuracy: 0.9211, MCC: 0.8341). Orthogonal axis-aligned splits exhibit higher variance on continuous biological measurements.
 
-### Best Model Selection
-**Logistic Regression** and **Support Vector Machine** are the top choices, each missing only a single malignant case. Logistic Regression is selected as the primary production model due to its high interpretability, calibrated output probabilities, and minimal deployment overhead.
+| ML Model Name | Observation about model performance |
+| :--- | :--- |
+| **Logistic Regression** | Achieved the highest overall performance across all evaluated metrics (Accuracy: 0.9825, AUC: 0.9954, MCC: 0.9623). FNA cell morphological measurements show strong linear separability with nuclear malignancy, allowing L2-regularized logistic loss to converge to an optimal, robust decision boundary with minimal risk of overfitting. |
+| **Decision Tree** | Recorded the lowest metrics among the five algorithms (Accuracy: 0.9211, AUC: 0.9163, MCC: 0.8341). Orthogonal axis-aligned rectangular splits are inherently more sensitive to variance and noise when partitioning continuous biological cell measurements. |
+| **KNN** | Delivered strong local clustering classification with an Accuracy of 0.9561, AUC of 0.9788, and MCC of 0.9054. Performance is well preserved due to rigorous standard scaling across all 30 continuous features, overcoming scale disparities. |
+| **Naive Bayes** | Demonstrated high discriminative ranking capability with an AUC of 0.9878, Accuracy of 0.9386, and Recall of 0.9583. Although the feature independence assumption is partially violated by correlated dimension features (e.g., radius, perimeter, and area), its probabilistic ranking remains very competitive. |
+| **Support Vector Machine** | Closely matched Logistic Regression with an Accuracy of 0.9825, MCC of 0.9623, and AUC of 0.9950. The radial basis function maps subtle non-linear margin variations effectively while maintaining strong geometric margin maximization. |
+| **Overall, Winner for your dataset?** | While **Logistic Regression** and **Support Vector Machine (RBF)** tied for peak performance (0.9623 MCC, with just one missed malignant case), **Logistic Regression** was chosen as the deployment champion. In oncology screening, transparent predictions are essential so pathologists can audit which cell traits drive a diagnosis. Its direct log-odds interpretability, natively calibrated confidence scores, and instant inference make it the most dependable choice for real-time clinical deployment. |
