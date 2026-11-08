@@ -18,15 +18,17 @@ The goal is to implement and evaluate five supervised machine learning classific
 | ML Model Name | Accuracy | AUC | Precision | Recall | F1 | MCC |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Logistic Regression | 0.9825 | 0.9954 | 0.9861 | 0.9861 | 0.9861 | 0.9623 |
-| Decision Tree | 0.9211 | 0.9163 | 0.9565 | 0.9167 | 0.9362 | 0.8341 |
-| KNN | 0.9561 | 0.9788 | 0.9589 | 0.9722 | 0.9655 | 0.9054 |
-| Naive Bayes | 0.9386 | 0.9878 | 0.9452 | 0.9583 | 0.9517 | 0.8676 |
 | Support Vector Machine | 0.9825 | 0.9950 | 0.9861 | 0.9861 | 0.9861 | 0.9623 |
+| K-Nearest Neighbors (KNN) | 0.9561 | 0.9788 | 0.9589 | 0.9722 | 0.9655 | 0.9054 |
+| Naive Bayes (GaussianNB) | 0.9386 | 0.9878 | 0.9452 | 0.9583 | 0.9517 | 0.8676 |
+| Decision Tree | 0.9211 | 0.9163 | 0.9565 | 0.9167 | 0.9362 | 0.8341 |
 
 ## e. Observations on Model Performance
-* **Logistic Regression:** Performs strongly with an accuracy of 0.9825 and an AUC of 0.9954. Standard scaling enables linear separation across continuous features.
-* **Decision Tree:** Yields an accuracy of 0.9211 and MCC of 0.8341. While interpretable, individual decision trees exhibit higher variance on unseen test partitions.
-* **KNN:** Achieves an accuracy of 0.9561 and MCC of 0.9054. Local neighborhood voting works effectively across standardized continuous attributes.
-* **Naive Bayes:** Scores 0.9386 in accuracy and 0.9878 in AUC. The Gaussian conditional independence assumption holds well, though inter-feature correlations slightly reduce accuracy.
-* **Support Vector Machine:** Achieves an accuracy of 0.9825 and an AUC of 0.9950. The radial basis function (RBF) kernel accurately models margin boundaries.
-* **Overall Winner:** **Logistic Regression** and **Support Vector Machine (SVM)** are tied for the highest Accuracy (0.9825), Precision (0.9861), Recall (0.9861), F1 (0.9861), and MCC (0.9623), with Logistic Regression holding a slight edge in AUC (0.9954).
+* **Logistic Regression:** Top performer across all key metrics (Accuracy: 0.9825, AUC: 0.9954, MCC: 0.9623). FNA cell morphological measurements show strong linear separability with malignancy, allowing $L_2$-regularized logistic loss to converge to an optimal decision boundary.
+* **Support Vector Machine (RBF):** Closely matches Logistic Regression with an Accuracy of 0.9825, MCC of 0.9623, and AUC of 0.9950. The radial basis function separates subtle non-linear margin variations effectively.
+* **K-Nearest Neighbors (KNN, k=5):** Strong local clustering performance (Accuracy: 0.9561, MCC: 0.9054), benefiting from standard scaling across the 30 continuous features.
+* **Naive Bayes (GaussianNB):** Good discriminative ranking (AUC: 0.9878, Accuracy: 0.9386), although class-conditional feature independence is partially violated by correlated cell dimension features.
+* **Decision Tree (CART):** Lowest scoring model (Accuracy: 0.9211, MCC: 0.8341). Orthogonal axis-aligned splits exhibit higher variance on continuous biological measurements.
+
+### Best Model Selection
+**Logistic Regression** and **Support Vector Machine** are the top choices, each missing only a single malignant case. Logistic Regression is selected as the primary production model due to its high interpretability, calibrated output probabilities, and minimal deployment overhead.
