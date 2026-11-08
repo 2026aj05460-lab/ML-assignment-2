@@ -11,8 +11,8 @@ The goal is to implement and evaluate five supervised machine learning classific
 * **Target:** Binary classification (`target`: 0 = Malignant, 1 = Benign)
 
 ## c. GitHub Repository Link
-* Repository: `https://github.com/<your-username>/<your-repo-name>`
-* Live Streamlit App: `https://<your-username>-<your-repo-name>-app-xxxx.streamlit.app`
+* **GitHub Repository:** https://github.com/2026aj05460-lab/ML-assignment-2
+* **Live Streamlit App:** https://ml-assignment--2.streamlit.app/
 
 ## d. Model Comparison Table
 | ML Model Name | Accuracy | AUC | Precision | Recall | F1 | MCC |
